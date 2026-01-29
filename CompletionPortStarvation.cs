@@ -23,7 +23,6 @@ public static class CompletionPortStarvation
     PrintThreadPoolInformation(out _, out _, out _, out _);
 
     Console.WriteLine($"File content {readValue}");
-    Console.ReadLine();
   }
 
   private static void PrintThreadPoolInformation(out int workerThread, out int completionPortThreads, out int maxWorkerThread, out int maxCompletionPortThreads)

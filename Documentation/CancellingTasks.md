@@ -4,7 +4,8 @@ This scenario demonstrates two ways to cancel tasks using `CancellationToken`.
 
 ## CancelAfterTimeout
 
-Creates a `CancellationTokenSource` with a built-in timeout. The token automatically cancels after the specified duration.
+Creates a `CancellationTokenSource` with a built-in timeout.
+The token automatically cancels after the specified duration.
 
 ```C#
 var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(3));
@@ -20,7 +21,8 @@ var awaitable = Task.Delay(TimeSpan.FromSeconds(5), cancellationTokenSource.Toke
 
 ## CancelManually
 
-Creates a `CancellationTokenSource` and cancels it programmatically from another task.
+Creates a `CancellationTokenSource` and cancels it programmatically from
+another task.
 
 ```C#
 var cancellationTokenSource = new CancellationTokenSource();
@@ -43,6 +45,7 @@ var cancellingTask = Task.Run(async () =>
 | Method | Use Case |
 | ------ | -------- |
 | `new CancellationTokenSource(TimeSpan)` | Fixed timeout scenarios |
-| `cancellationTokenSource.Cancel()` | Event-driven cancellation (user action, external signal) |
+| `cancellationTokenSource.Cancel()` | Event-driven cancellation |
 
-Both approaches result in a `TaskCanceledException` that should be caught and handled appropriately.
+Both approaches result in a `TaskCanceledException` that should be caught
+and handled appropriately.

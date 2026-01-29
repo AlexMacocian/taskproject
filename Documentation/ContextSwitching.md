@@ -1,10 +1,12 @@
 # Context Switching Cost
 
-This scenario demonstrates the performance cost of different execution models by comparing synchronous, async, and thread-based approaches.
+This scenario demonstrates the performance cost of different execution models
+by comparing synchronous, async, and thread-based approaches.
 
 ## Overview
 
-Context switching occurs when the CPU switches from executing one thread to another. This involves:
+Context switching occurs when the CPU switches from executing one thread
+to another. This involves:
 
 - Saving the current thread's state (registers, stack pointer)
 - Loading the new thread's state
@@ -27,7 +29,8 @@ static void DoSync()
 }
 ```
 
-**Baseline** - Pure synchronous execution with no context switches. All work runs on a single thread continuously.
+**Baseline** - Pure synchronous execution with no context switches.
+All work runs on a single thread continuously.
 
 ### 2. Async without Yield
 
@@ -39,7 +42,9 @@ static async Task NoYieldHelper(Task task)
 }
 ```
 
-Uses `async/await` but the awaited task is **already completed**. The state machine runs synchronously without yielding control, so no actual context switch occurs.
+Uses `async/await` but the awaited task is **already completed**.
+The state machine runs synchronously without yielding control, so no actual
+context switch occurs.
 
 ### 3. Async with Yield
 
@@ -54,7 +59,9 @@ async delegate
 }
 ```
 
-`Task.Yield()` forces the task to re-queue itself on the thread pool after each unit of work. This causes **scheduler overhead** but not necessarily a full thread switch.
+`Task.Yield()` forces the task to re-queue itself on the thread pool after each
+unit of work. This causes **scheduler overhead** but not necessarily
+a full thread switch.
 
 ### 4. Thread Switches
 
@@ -71,7 +78,9 @@ void worker()
 }
 ```
 
-Multiple threads compete for work using an `AutoResetEvent`. Each `WaitOne()`/`Set()` cycle causes an **actual OS-level context switch** between threads.
+Multiple threads compete for work using an `AutoResetEvent`.
+Each `WaitOne()`/`Set()` cycle causes an
+**actual OS-level context switch** between threads.
 
 ## Expected Results
 
@@ -84,7 +93,11 @@ Multiple threads compete for work using an `AutoResetEvent`. Each `WaitOne()`/`S
 
 ## Key Takeaways
 
-1. **Async is not free** - Even without thread switches, `Task.Yield()` adds scheduler overhead
-2. **Thread switches are expensive** - OS-level context switches are orders of magnitude slower
-3. **Completed tasks are cheap** - Awaiting an already-completed task has minimal overhead
-4. **Prefer async over threads** - For I/O-bound work, async avoids the heavy cost of thread switches
+1. **Async is not free** - Even without thread switches,
+`Task.Yield()` adds scheduler overhead
+2. **Thread switches are expensive** - OS-level context switches
+are orders of magnitude slower
+3. **Completed tasks are cheap** - Awaiting an already-completed
+task has minimal overhead
+4. **Prefer async over threads** - For I/O-bound work, async
+avoids the heavy cost of thread switches

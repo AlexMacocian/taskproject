@@ -1,10 +1,13 @@
 # Multiple Async Operations
 
-This scenario demonstrates how to await multiple tasks concurrently using `Task.WhenAll` and `Task.WhenAny`.
+This scenario demonstrates how to await multiple tasks concurrently
+using `Task.WhenAll` and `Task.WhenAny`.
 
 ## Overview
 
-When you have multiple independent async operations, you can run them concurrently rather than sequentially. TAP provides two methods for coordinating multiple tasks:
+When you have multiple independent async operations, you can run them
+concurrently rather than sequentially. TAP provides two methods for
+coordinating multiple tasks:
 
 | Method | Returns When | Returns |
 | ------ | ------------ | ------- |
@@ -62,8 +65,9 @@ WhenAny returned after 3000ms
 Completed tasks after 6000ms
 ```
 
-> **Note:** In `WhenAny`, awaiting the remaining tasks after `WhenAny` returns still takes until
-> all tasks complete (~6 seconds total), because they were already running.
+> **Note:** In `WhenAny`, awaiting the remaining tasks after `WhenAny`
+> returns still takes until all tasks complete (~6 seconds total),
+> because they were already running.
 
 ## Use Cases
 
@@ -77,9 +81,12 @@ Completed tasks after 6000ms
 ## Key Takeaways
 
 1. **Tasks start immediately** - Not when you `await` them
-2. **WhenAny doesn't cancel others** - Remaining tasks keep running unless you cancel them
-3. **Use CancellationToken** - Pass tokens to cancel remaining tasks after `WhenAny` returns
-4. **Sequential vs Concurrent** - Awaiting tasks one-by-one is sequential; use `WhenAll` for concurrency
+2. **WhenAny doesn't cancel others** - Remaining tasks keep running
+unless you cancel them
+3. **Use CancellationToken** - Pass tokens to cancel remaining tasks
+after `WhenAny` returns
+4. **Sequential vs Concurrent** - Awaiting tasks one-by-one is sequential;
+use `WhenAll` for concurrency
 
 ```C#
 // Sequential - takes 14 seconds total

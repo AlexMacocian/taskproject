@@ -1,10 +1,13 @@
 # Thread Pool Starvation
 
-This scenario demonstrates what happens when blocking tasks exhaust the thread pool, causing subsequent tasks to wait for available threads.
+This scenario demonstrates what happens when blocking tasks exhaust the
+thread pool, causing subsequent tasks to wait for available threads.
 
 ## Overview
 
-The .NET `ThreadPool` maintains a limited number of worker threads. When all threads are blocked (e.g., by `Thread.Sleep` or synchronous I/O), new tasks must wait in a queue until a thread becomes available.
+The .NET `ThreadPool` maintains a limited number of worker threads.
+When all threads are blocked (e.g., by `Thread.Sleep` or synchronous I/O),
+new tasks must wait in a queue until a thread becomes available.
 
 ## What the Code Does
 
@@ -34,11 +37,13 @@ for (var i = 1; i <= minWorker * 2; i++)  // 8 tasks, but only 4 threads
 }
 ```
 
-Creates 8 tasks but only 4 threads are available. Each task blocks its thread for 3 seconds.
+Creates 8 tasks but only 4 threads are available.
+Each task blocks its thread for 3 seconds.
 
 ### 3. Observe the Starvation
 
-Tasks 1-4 start immediately, but tasks 5-8 must wait ~3 seconds until the first batch completes.
+Tasks 1-4 start immediately, but tasks 5-8 must wait ~3 seconds
+until the first batch completes.
 
 ## Expected Output
 
