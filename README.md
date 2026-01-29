@@ -1,5 +1,22 @@
 # Demystifying Tasks
 
+<!--toc:start-->
+- [Demystifying Tasks](#demystifying-tasks)
+  - [TAP - Task asynchronous programming model](#tap---task-asynchronous-programming-model)
+    - [Overview](#overview)
+    - [Task and ValueTask](#task-and-valuetask)
+    - [Cancellation](#cancellation)
+    - [Tasks vs Threads](#tasks-vs-threads-6)
+    - [The managed thread pool](#the-managed-thread-pool-7)
+      - [Worker Threads vs I/O Completion Port (IOCP) Threads](#worker-threads-vs-io-completion-port-iocp-threads)
+      - [Managing the ThreadPool](#managing-the-threadpool)
+    - [Async and await](#async-and-await)
+      - [The State Machine](#the-state-machine-9)
+      - [Awaiting Multiple Tasks](#awaiting-multiple-tasks)
+  - [Scenarios](#scenarios)
+  - [Documentation](#documentation)
+<!--toc:end-->
+
 ## TAP - Task asynchronous programming model
 
 The general goal of [TAP][1] is to improve responsiveness of an application
