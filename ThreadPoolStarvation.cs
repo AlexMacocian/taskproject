@@ -13,7 +13,7 @@ public static class ThreadPoolStarvation
     ThreadPool.SetMaxThreads(minWorker, minIOC);
 
     Console.WriteLine($"ThreadPool configured: Min/Max = {minWorker} worker threads");
-    Console.WriteLine($"Starting {minWorker + 4} blocking tasks to cause starvation...\n");
+    Console.WriteLine($"Starting {minWorker * 2} blocking tasks to cause starvation...\n");
 
     var tasks = new List<Task>();
     var sw = Stopwatch.StartNew();
